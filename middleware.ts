@@ -10,18 +10,17 @@ export function middleware(req: NextRequest) {
     const excludePath = '/authentication/login';
     const isExcludedPath = pathname.startsWith(excludePath);
     const isRootPath = pathname === '/';
-    if (!isExcludedPath && !token) {
-      return NextResponse.redirect(new URL('/authentication/login', req.url));
-    }
-
-    if (pathname === '/onboarding') return NextResponse.next();
-    if (!isExcludedPath && isRootPath) {
-      if (token) {
-        return NextResponse.redirect(new URL('/dashboard', req.url));
-      } else {
-        return NextResponse.redirect(new URL('/authentication/login', req.url));
-      }
-    }
+    // if (!isExcludedPath && !token) {
+    //   return NextResponse.redirect(new URL('/authentication/login', req.url));
+    // }
+    // if (pathname === '/onboarding') return NextResponse.next();
+    // if (!isExcludedPath && isRootPath) {
+    //   if (token) {
+    //     return NextResponse.redirect(new URL('/dashboard', req.url));
+    //   } else {
+    //     return NextResponse.redirect(new URL('/authentication/login', req.url));
+    //   }
+    // }
     return NextResponse.next();
   } catch (error) {
     return NextResponse.next(); // Proceed to next response in case of error

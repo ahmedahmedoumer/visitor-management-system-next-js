@@ -11,7 +11,7 @@ interface CustomDrawerLayoutProps {
   width?: string;
   paddingBottom?: number;
   footer?: React.ReactNode | null;
-  hideButton?: boolean;
+  hideButton?: boolean; 
 }
 
 const CustomDrawerLayout: React.FC<CustomDrawerLayoutProps> = ({

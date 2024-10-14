@@ -1,7 +1,7 @@
 'use client';
 import { message } from 'antd';
 import { useRouter } from 'next/navigation';
-import { useGetTenantId } from '@/store/server/features/employees/authentication/queries';
+import { useGetTenantId } from '@/store/server/features/authentication/queries';
 import { useAuthenticationStore } from '@/store/uistate/features/authentication';
 import { handleFirebaseSignInError } from '@/utils/showErrorResponse';
 

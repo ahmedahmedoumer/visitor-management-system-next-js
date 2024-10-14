@@ -1,8 +1,6 @@
 'use client';
 import React from 'react';
 import { Select } from 'antd';
-
-import { PlanningAndReportingStore } from '@/store/uistate/features/planningAndReporting/useStore';
 import { useAuthenticationStore } from '@/store/uistate/features/authentication';
 
 const { Option } = Select;
@@ -22,35 +20,9 @@ const EmployeeSearch: React.FC<EmployeeSearchProps> = ({
   optionArray1,
   optionArray3,
 }) => {
-  const { setSelectedUser, selectedUser } = PlanningAndReportingStore();
   const { userId } = useAuthenticationStore();
-  /*eslint-disable @typescript-eslint/no-unused-vars */
-  const getUserIdsByDepartmentId = (selectedDepartmentId: string) => {
-    const department = optionArray3.find(
-      (dep: any) => dep.id === selectedDepartmentId,
-    );
-    if (department && department.users) {
-      return department.users.map((user: any) => user.id); // Returns array of user IDs
-    }
-    return []; // Returns empty array if no department or users found
-  };
-
-  // const onSearchChange = useDebounce(handleSearchEmployee, 2000);
   const onSearchChange = (value: any, key: string, isSelect: boolean) => {
-    setSelectedUser(['']);
-    if (key === 'employee') {
-      setSelectedUser([value]);
-    } else if (key === 'type') {
-      if (value === 'allPlan' || value === 'allReport') {
-        setSelectedUser(['all']);
-      } else {
-        setSelectedUser([userId]);
-      }
-    } else {
-      const listOfUsersId = getUserIdsByDepartmentId(value);
-      setSelectedUser([]);
-      setSelectedUser(listOfUsersId);
-    }
+    
   };
 
   return (
@@ -101,15 +73,6 @@ const EmployeeSearch: React.FC<EmployeeSearchProps> = ({
         <div className="w-full md:w-1/4 p-2" id="subscriptionTypeFilter">
           <Select
             placeholder="Select Type"
-            value={
-              selectedUser.length === 1 && selectedUser.includes(userId)
-                ? optionArray2?.[0]?.key // Exactly one user selected, and it's the current user
-                : selectedUser.length > 1
-                  ? undefined // Multiple users selected
-                  : selectedUser.includes('all')
-                    ? 'allPlan' // If "all" is selected, choose 'allPlan'
-                    : undefined // Default fallback if no conditions match
-            }
             onChange={(value) => onSearchChange(value, 'type', true)}
             allowClear
             className="w-full h-14"

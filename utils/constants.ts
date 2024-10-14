@@ -1,3 +1,6 @@
+export const VISITOR_MANAGMENT_URL = process.env.VISITOR_MANAGMENT_URL;
+
+
 export const ORG_AND_EMP_URL = process.env.ORG_AND_EMP_URL;
 export const OKR_URL = process.env.OKR_URL;
 
@@ -13,6 +16,7 @@ export const BASE_FRONT_URL = process.env.BASE_FRONT_URL;
 export const DATE_FORMAT = 'DD MMM YYYY';
 export const DATETIME_FORMAT = 'DD MMM YYYY hh:mm A';
 export const TIME_FORMAT = 'hh:mm A';
+export const DATE_FORMAT_IN_NUMBER='YYYY-MM-DD';
 
 export const TIME_AND_ATTENDANCE_URL =
   process.env.NEXT_PUBLIC_TIME_AND_ATTENDANCE_URL;

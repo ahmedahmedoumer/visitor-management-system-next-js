@@ -47,7 +47,7 @@ const Login: FC = () => {
     >
       <div className="bg-[#F1F2F3] w-full max-w-md py-4 px-6 rounded-lg my-5">
         <p className="text-center font-semibold">
-          <span className="text-blue">Selamnew</span> Workspace
+          <span className="text-blue">Sheraten</span> Visitor Managment
         </p>
         <h5 className="text-center my-2">Login</h5>
         <Form
@@ -132,7 +132,6 @@ const Login: FC = () => {
         </div>
       </div>
       <div className="text-xs font-thin text-center">
-        © 2024 Selamnew Workspace . All-rights reserved.
         {/* <span className="font-semibold ml-1 cursor-pointer">
           Terms & Conditions
         </span>

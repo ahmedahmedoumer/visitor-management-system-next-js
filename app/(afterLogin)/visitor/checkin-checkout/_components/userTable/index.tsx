@@ -56,10 +56,13 @@ const UserTable = () => {
       render: (text:any, record:any) => (
         <div className='flex space-x-2'>
           {record.isAvailable ? (
-            <Button className='bg-blue-300 text-blue-900' onClick={() => handleCheckOut(record)}>
-              Check-out
+            <Button className='bg-blue-300 text-blue' onClick={() => handleCheckOut(record)}>
+              Check-Out
             </Button>
-          ) : null}
+          ) : 
+            <Button className='bg-blue-300 text-green-900' onClick={() => handleCheckIn(record)}>
+                Check-In
+          </Button>}
         </div>
       ),
     },
@@ -71,6 +74,11 @@ const UserTable = () => {
     setIsCheckoutModalVisible(true); // Show the checkout modal
   };
 
+  const handleCheckIn = (visitor: any) => {
+    setCurrentVisitor(visitor);
+    setSelectedProperties([]); // Reset selected properties
+    setIsCheckoutModalVisible(true); // Show the checkout modal
+  };
   const handleModalOk = () => {
     // Implement the logic to handle the checkout with selected properties
     const newItem={

@@ -43,12 +43,10 @@ const Login: FC = () => {
   return (
     <div
       className="h-screen w-full flex flex-col justify-center items-center bg-cover bg-center bg-no-repeat px-4"
-      style={{ backgroundImage: 'url(/login-background.png)', margin: 0 }}
+      style={{ backgroundImage: 'url(/image/back.png)', margin: 0 }}
     >
-      <div className="bg-[#F1F2F3] w-full max-w-md py-4 px-6 rounded-lg my-5">
-        <p className="text-center font-semibold">
-          <span className="text-blue">Sheraten</span> Visitor Managment
-        </p>
+      <div className="bg-[#F1F2F3] opacity-90  w-full max-w-md py-4 px-6 rounded-lg my-5">
+
         <h5 className="text-center my-2">Login</h5>
         <Form
           name="login-form"
@@ -92,9 +90,9 @@ const Login: FC = () => {
             <Form.Item name="remember" valuePropName="checked" noStyle>
               <Checkbox className="m-1">Remember me</Checkbox>
             </Form.Item>
-            {/* <Button className="float-right m-0 p-0" type="link">
+            <Button className="float-right m-0 p-0" type="link">
               Forgot password
-            </Button> */}
+            </Button>
           </Form.Item>
 
           <Form.Item>
@@ -109,35 +107,14 @@ const Login: FC = () => {
             </Button>
           </Form.Item>
         </Form>
-        <p className="text-center text-xs font-light mb-5">Or login with</p>
-        <div className="flex flex-col sm:flex-row gap-2">
-          <Button
-            size="small"
-            icon={<Google />}
-            className="p-4 text-sm bg-transparent"
-            onClick={handleGoogleSignIn}
-            block
-          >
-            Google
-          </Button>
-          <Button
-            size="small"
-            icon={<Microsoft />}
-            className="p-4 text-sm bg-transparent"
-            onClick={handleMicrosoftSignIn}
-            block
-          >
-            Microsoft
-          </Button>
-        </div>
       </div>
       <div className="text-xs font-thin text-center">
-        {/* <span className="font-semibold ml-1 cursor-pointer">
+        <span className="font-semibold ml-1 cursor-pointer">
           Terms & Conditions
         </span>
         <span className="font-semibold ml-1 cursor-pointer">
           Privacy Settings
-        </span> */}
+        </span>
       </div>
     </div>
   );

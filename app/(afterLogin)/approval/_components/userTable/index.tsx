@@ -164,7 +164,7 @@ const UserTable = () => {
           total: unReportedVisitor?.total,
           onChange: (page, pageSize) => {
            setPage(page);
-           setPageSize(pageSize)
+           setPageSize(pageSize);
           },
         }}
         scroll={{ x: 'max-content' }} // Enable horizontal scrolling

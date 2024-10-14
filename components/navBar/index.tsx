@@ -37,15 +37,15 @@ const menuItems: MenuProps['items'] = [
     label: 'Visitors',
     className: 'font-bold',
     children: [
-      { key: '/visitor/manage-visitor', label: 'Manage-vivistor', className: 'font-bold' },
+      { key: '/visitor/manage-visitor', label: 'Manage-visitor', className: 'font-bold' },
       { key: '/visitor/checkin-checkout', label: 'Checkin-Checkout', className: 'font-bold' },
      ],
   },
   {
-    key: '/companies',
+    key: '/engineering',
     icon: <PiSuitcaseSimpleThin />,
     className: 'font-bold',
-    label: 'Company',
+    label: 'Engineering',
   },
   {
     key: '/approval',

@@ -6,6 +6,8 @@ import UserSidebar from './_components/userSidebar';
 import EmployeeSearch from '@/components/common/search/employeeSearch';
 import UserTable from './_components/userTable';
 import { useUsersStore } from '@/store/uistate/features/users';
+import { FaBarcode } from 'react-icons/fa';
+import { Input } from 'antd';
 
 const Visitors: React.FC<any> = () => {
   const { setOpen } = useUsersStore();
@@ -23,14 +25,21 @@ const Visitors: React.FC<any> = () => {
         <div className="flex flex-wrap justify-between items-center">
           <CustomBreadcrumb
             title="Visitor Log"
-            subtitle="Manage your Visitor Log List"
+            subtitle="Manage checkin checkout log list"
           />
           <div className="flex flex-wrap justify-start items-center my-4 gap-4 md:gap-8">
             <UserSidebar onClose={onClose} />
           </div>
         </div>
         <div className="w-full h-auto">
-          <EmployeeSearch />
+        <div className="flex items-center mb-4">
+            <Input
+              placeholder="Scan or enter barcode"
+              className="flex-grow h-12"
+              allowClear
+              prefix={<FaBarcode className="text-gray-950 text-2xl" />} // Barcode icon as prefix
+            />
+          </div>
           <UserTable />
         </div>
       </BlockWrapper>

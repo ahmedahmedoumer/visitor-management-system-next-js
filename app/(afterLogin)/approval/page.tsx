@@ -15,18 +15,9 @@ const Approval: React.FC<any> = () => {
       <BlockWrapper>
         <div className="flex flex-wrap justify-between items-center">
           <CustomBreadcrumb
-            title="Users"
-            subtitle="Manage your Users"
+            title="Approval"
+            subtitle="Manage your Approval"
           />
-          <div className="flex flex-wrap justify-start items-center my-4 gap-4 md:gap-8">
-            <CustomButton
-              title="Create user"
-              id="createUserButton"
-              icon={<FaPlus className="mr-2" />}
-              // onClick={showDrawer}
-              className="bg-blue-600 hover:bg-blue-700"
-            />
-          </div>
         </div>
         <div className="w-full h-auto">
           <EmployeeSearch />

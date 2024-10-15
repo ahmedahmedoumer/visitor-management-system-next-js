@@ -21,7 +21,7 @@ const getAllUnApprovedVisitors = async (page:number,pageSize:number) => {
 };
 
 // Function to retrieve a specific visitor by ID
-const getVisitorById = async (id: string) => {
+const getVisitorById = async (id: string|null) => {
   const token = useAuthenticationStore.getState().token; // Access the latest token
   const localId = useAuthenticationStore.getState().localId;
   const response = await axios.get(`${VISITOR_MANAGMENT_URL}/visitors/${id}`);
@@ -41,7 +41,8 @@ export const useGetUnApprovedVisitors = (page:number,pageSize:number) =>
   });
   
 
-export const useGetVisitorById = (id: string) =>
+export const useGetVisitorById = (id: string|null) =>
   useQuery<any>(['visitor', id], () => getVisitorById(id), {
     keepPreviousData: true,
+    enabled:!!id,
   });

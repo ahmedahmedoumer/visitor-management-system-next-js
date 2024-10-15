@@ -3,6 +3,7 @@ import { VISITOR_MANAGMENT_URL } from '@/utils/constants';
 import { useMutation, useQueryClient } from 'react-query';
 import NotificationMessage from '@/components/common/notification/notificationMessage';
 import { crudRequest } from '@/utils/crudRequest';
+import { Material } from './interface';
 
 
 const checkOutVisitor = async (
@@ -12,32 +13,36 @@ const checkOutVisitor = async (
       tenantId: "tenantId",
       Authorization: `Bearer ${"token"}`,
     };
-    // /okr-report-task/create-report/:userId/:planningPeriodId
     return await crudRequest({
       url: `${VISITOR_MANAGMENT_URL}/checkout/${id}`,
       method: 'post',
       data: {
-        id:id,
+        visitor_id:id,
         property_ids:checkedOutProperty
       },
       headers,
     });
   };
 
-const checkInVisitor = async (
-  id: string,
-) => {
-  const headers = {
-    tenantId: "tenantId",
-    Authorization: `Bearer ${"token"}`,
-  };
-  // /okr-report-task/create-report/:userId/:planningPeriodId
-  return await crudRequest({
-    url: `${VISITOR_MANAGMENT_URL}/visitors/${id}`,
-    method: 'delete',
-    headers,
-  });
-};
+  // const checkInVisitor = async (id:string,values: Material[]) => {
+  //   const headers = {
+  //     tenantId: "tenantId",
+  //     Authorization: `Bearer ${"token"}`,
+  //   };
+  //   const url = `${VISITOR_MANAGMENT_URL}/visitors/${id}`;
+  //   try {
+  //     return await crudRequest({
+  //       url,
+  //       method: "patch",
+  //       headers,
+  //       data:values,
+  //     });
+  //   } catch (error) {
+  //     console.error("Error while checking in visitor:", error);
+  //     throw error; 
+  //   }
+  // };
+  
 
 const updateVisitor = async (
   id:string,
@@ -57,20 +62,45 @@ const updateVisitor = async (
 };
   
 
+// API function that performs the check-in operation
+const checkInVisitor = async (id: string, values: Material[]) => {
+  const headers = {
+    tenantId: "tenantId",
+    Authorization: `Bearer ${"token"}`,
+  };
+  
+  // Adjust the URL according to your backend route
+  
+  return await crudRequest({
+    url: `${VISITOR_MANAGMENT_URL}/checkin/${id}`,
+    method: 'post',
+    headers,
+    data: { properties: values },
+  });
+};
+
+// React Query hook for the check-in mutation
 export const useCheckInVisitor = () => {
   const queryClient = useQueryClient();
   return useMutation(
-      ({ id, values }: { id: string; values: any }) =>checkInVisitor(id),
+    ({ id, values }: { id: string; values: any }) => checkInVisitor(id, values),
     {
-      onSuccess:()=>{
+      onSuccess: () => {
         queryClient.invalidateQueries('visitors');
-        
         NotificationMessage.success({
-        message: 'Successfully Updated',
-        description: 'visitors successfully Updated',
-      });
-      }
-    });
+          message: 'Successfully Updated',
+          description: 'Visitors successfully updated.',
+        });
+      },
+      onError: (error) => {
+        console.error("Check-in error:", error);
+        NotificationMessage.error({
+          message: 'Error',
+          description: 'There was an error updating the visitors.',
+        });
+      },
+    }
+  );
 };
 export const useCheckOutVisitor = () => {
 const queryClient = useQueryClient();

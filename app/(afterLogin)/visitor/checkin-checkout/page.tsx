@@ -1,22 +1,34 @@
 'use client';
 import CustomBreadcrumb from '@/components/common/breadCramp';
-import React from 'react';
+import React, { useState } from 'react';
 import BlockWrapper from '@/components/common/blockWrapper/blockWrapper';
 import UserSidebar from './_components/userSidebar';
 import EmployeeSearch from '@/components/common/search/employeeSearch';
 import UserTable from './_components/userTable';
 import { useUsersStore } from '@/store/uistate/features/users';
 import { FaBarcode } from 'react-icons/fa';
-import { Input } from 'antd';
+import { Button, Form, Input } from 'antd';
+import { useGetVisitorById } from '@/store/server/features/visitor/queries';
 
 const Visitors: React.FC<any> = () => {
   const { setOpen } = useUsersStore();
-
+const [visitorId,setVisitorId]=useState(null);
+  const {data:getVisitorById}=useGetVisitorById(visitorId);
+console.log(getVisitorById,"getVisitorById")
   const showDrawer = () => {
     setOpen(true);
   };
   const onClose = () => {
     setOpen(false);
+  };
+  const handleBarcodeSubmit = (event:any) => {
+    event.preventDefault();
+    const barcode = event.target.value.trim();
+     setVisitorId(barcode);
+    if (barcode) {
+      console.log("Barcode Scanned or Entered:", barcode);
+      // Handle the barcode (e.g., send it to your backend or process it)
+    }
   };
 
   return (
@@ -33,12 +45,16 @@ const Visitors: React.FC<any> = () => {
         </div>
         <div className="w-full h-auto">
         <div className="flex items-center mb-4">
-            <Input
-              placeholder="Scan or enter barcode"
-              className="flex-grow h-12"
-              allowClear
-              prefix={<FaBarcode className="text-gray-950 text-2xl" />} // Barcode icon as prefix
-            />
+            <Form onFinish={handleBarcodeSubmit} className="w-full">
+              <Input
+                placeholder="Scan or enter barcode"
+                className="flex-grow h-12"
+                allowClear
+                type="search"
+                prefix={<FaBarcode className="text-gray-950 text-2xl" />} // Barcode icon as prefix
+                onPressEnter={handleBarcodeSubmit} // Triggers when "Enter" is pressed
+              />
+            </Form>
           </div>
           <UserTable />
         </div>
